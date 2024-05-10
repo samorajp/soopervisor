@@ -270,7 +270,7 @@ class AWSBatchExporter(abc.AbstractExporter):
                 lazy_import=lazy_import,
                 task_name=task_name,
             )
-
+            cli_args = [x.replace('\\', '/') for x in cli_args] # hack: fix for windows
             if not tasks:
                 cls._no_tasks_to_submit()
                 raise CommanderStop(
