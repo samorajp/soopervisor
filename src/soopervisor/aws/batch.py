@@ -138,6 +138,9 @@ def _submit_dag(
         jobDefinitionName=job_def,
         type="container",
         containerProperties=container_properties,
+        retryStrategy={
+            "attempts": 3,
+        },
     )
     jd_map[default_image_key] = jd
 
