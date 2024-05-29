@@ -138,9 +138,6 @@ def _submit_dag(
         jobDefinitionName=job_def,
         type="container",
         containerProperties=container_properties,
-        retryStrategy={
-            "attempts": 3,
-        },
     )
     jd_map[default_image_key] = jd
 
@@ -201,6 +198,9 @@ def _submit_dag(
             jobDefinition=task_jd["jobDefinitionArn"],
             dependsOn=[{"jobId": job_ids[name]} for name in upstream],
             containerOverrides=container_overrides,
+            retryStrategy={
+                "attempts": 3,
+            },
         )
 
         job_ids[name] = response["jobId"]
